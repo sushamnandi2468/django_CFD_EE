@@ -2,18 +2,41 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
-        <form method="POST" enctype="multipart/form-data" action="predict">
+        <form method="POST" enctype="multipart/form-data" action="prediction">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Upload File</legend>
                     <input type='file' name="document">                    
                     <div class="border-top pt-3">
                         <small class="text-muted">File Name : {{uploaded_file.name}}</small>
-                    </div>
+                    </div>                    
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Classify</button>
             </div>
         </form>
+        {% if prediction %}
+        <table class="table table-dark table-striped"> 
+            <thead> 
+              <tr> 
+                <th>First Name</th> 
+                <th>Last Name</th> 
+                <th>Classification</th> 
+              </tr> 
+            </thead> 
+            <tbody> 
+            <!-- jinja2 Technique -->
+               
+            {% for i in prediction %} 
+              <tr> 
+                <td>{{i.First_Name}}</td> 
+                <td>{{i.Last_Name}}</td> 
+                <td>{{i.label}}</td>
+              </tr> 
+            {% endfor %} 
+        {% endif %} 
+            </tbody> 
+          </table> 
+
     </div>
 {% endblock content %}

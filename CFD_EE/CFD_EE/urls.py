@@ -29,7 +29,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('AI_Fraud_Detection.urls')),
     path('classify/', ml_views.classify, name='classify'),
-    path('classify/predict', ml_views.fileupload, name='Predict'),
+    path('classify/prediction', ml_views.prediction, name='Predict'),
 ] 
 
 if settings.DEBUG:
