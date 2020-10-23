@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'AI_Fraud_Detection.apps.AiFraudDetectionConfig',
     'users.apps.UsersConfig',
+    'CFD_ML.apps.CfdMlConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',

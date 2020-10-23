@@ -1,0 +1,19 @@
+{% extends "AI_Fraud_Detection/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data" action="predict">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Upload File</legend>
+                    <input type='file' name="document">                    
+                    <div class="border-top pt-3">
+                        <small class="text-muted">File Name : {{uploaded_file.name}}</small>
+                    </div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Classify</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
