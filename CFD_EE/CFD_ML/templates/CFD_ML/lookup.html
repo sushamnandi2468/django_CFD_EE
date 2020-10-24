@@ -1,0 +1,25 @@
+{% extends "AI_Fraud_Detection/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data" action="singlelookup">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Single Lookup Check</legend>
+                <table>
+                    <tr><td>First Name</td><td><input type="text" name="fname"></input></td></tr>
+                    <tr><td>Last Name</td><td><input type="text" name="lname"></input></td></tr>
+                    <tr><td>Date of Birth</td><td><input type="date" name="dob"></input></td></tr>
+                </table>                    
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Classify</button>
+            </div>
+        </form>
+        {% if prediction.label == 'Not Fraud' %}        
+            <font color='green'>{{ prediction.label }}</font>
+        {% else %}
+            <font color='red'>{{ prediction.label }}</font>
+        {% endif %}
+    </div>
+{% endblock content %}

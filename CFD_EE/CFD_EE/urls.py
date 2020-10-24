@@ -30,6 +30,8 @@ urlpatterns = [
     path('', include('AI_Fraud_Detection.urls')),
     path('classify/', ml_views.classify, name='classify'),
     path('classify/prediction', ml_views.prediction, name='Predict'),
+    path('lookup/', ml_views.lookup, name='lookup'),
+    path('lookup/singlelookup', ml_views.singlelookup, name='slookup'),
 ] 
 
 if settings.DEBUG:
