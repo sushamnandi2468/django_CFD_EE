@@ -1,12 +1,22 @@
-{% extends "AI_Fraud_Detection/base.html" %}
+{% extends "AI_Fraud_Detection/base1.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <ol class="breadcrumb mt-4 mb-3">
+      <li class="breadcrumb-item">
+        <a href="{% url 'AI-home' %}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Customer Fraud Detection</li>
+  </ol>
+
+  <div class="row mt-4 mb-3">
+      <div class="col-lg-8 mb-4">
         <form method="POST" enctype="multipart/form-data" action="prediction">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Upload File</legend>
-                    <input type='file' name="document">                    
+                    <input type='file' name="document" class="btn btn-outline-info">                    
                     <div class="border-top pt-3">
                         <small class="text-muted">File Name : {{uploaded_file.name}}</small>
                     </div>                    
@@ -16,7 +26,50 @@
             </div>
         </form>
         {% if prediction %}
-        <table class="table table-dark table-striped"> 
+
+          <div class="row mt-4 mb-3">
+            <p>
+              False positive percentage reduced {{fp_percent}}
+            </p>
+            <table class="table table-light table-striped">
+              <thead> 
+                <tr> 
+                  <th>Classification</th> 
+                  <th>Count</th>                   
+                </tr> 
+              </thead> 
+              <tbody> 
+                <tr> 
+                  <td>False Positive</td> 
+                  <td>
+                    {{fp_count}}
+                  </td>                   
+                </tr>
+                <tr> 
+                  <td>Fraud</td> 
+                  <td>
+                    {{f_count}}
+                  </td>                   
+                </tr>
+                <tr> 
+                  <td>New Customer</td> 
+                  <td>
+                    {{n_count}}
+                  </td>                   
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <img src="/media/graph.png" height="400">
+          </div>
+        
+        <h3>Classification Data</h3>
+        <small>
+          <a href="/media/output.csv">Download file</a>
+        </small>
+        <table class="table table-light table-striped"> 
             <thead> 
               <tr> 
                 <th>First Name</th> 
@@ -38,5 +91,7 @@
             </tbody> 
           </table> 
 
+      </div>
     </div>
+  </div>
 {% endblock content %}

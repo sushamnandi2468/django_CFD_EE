@@ -93,9 +93,6 @@ class CustomerFraudDetection:
         return output_data
 
 
-
-
-
 #Lookup Single User Data
 
     #Data Pre processing
