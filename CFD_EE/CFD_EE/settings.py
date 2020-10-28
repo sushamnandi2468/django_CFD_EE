@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'AI_Fraud_Detection.apps.AiFraudDetectionConfig',
     'users.apps.UsersConfig',
     'CFD_ML.apps.CfdMlConfig',
+    'blog.apps.BlogConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',

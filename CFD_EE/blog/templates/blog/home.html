@@ -1,0 +1,92 @@
+{% extends "AI_Fraud_Detection/base1.html" %}
+{% block content %}
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <ol class="breadcrumb mt-4 mb-3">
+            <li class="breadcrumb-item">
+            <a href="{% url 'AI-home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Blog</li>
+        </ol>
+        <div class="row">
+            
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+            <!-- Blog Post -->
+                {% for post in posts %}
+                <div class="card mb-4">
+                    <!--<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">-->
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="card-text">{{ post.content }}
+                        <a href="{% url 'post-detail' post.id%}" class="btn btn-primary">Read More &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ post.date_posted|date:"F d, Y" }} {{post.author}}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Widget -->
+                <div class="card mb-4">
+                <h5 class="card-header">Tags</h5>
+                <div class="card-body">
+                    <img src="/media/DRR.PNG">
+                </div>
+                </div>
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                <h5 class="card-header">Categories</h5>
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-lg-10">
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="{% url 'classify' %}">Customer Fraud Detection</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'lookup' %}">Customer Single Lookup</a>
+                        </li>
+                        <li>
+                            <a href="#">Payment Fraud Detection</a>
+                        </li>
+                        <li>
+                            <a href="#">Payment Single Lookup</a>
+                        </li>
+                        </ul>
+                    </div>              
+                    </div>
+                </div>
+                </div>
+                <!-- References Widget -->
+                <div class="card my-4">
+                <h5 class="card-header">References</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                <a href="#"></a>
+                                </li>
+                                <li>
+                                <a href="#"></a>
+                                </li>
+                                <li>
+                                <a href="#"></a>
+                                </li>
+                                <li>
+                                <a href="#"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+{% endblock content %}
