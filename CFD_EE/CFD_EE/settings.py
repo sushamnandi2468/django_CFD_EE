@@ -24,17 +24,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'lc3e2gn5ne%qhabjdt0$sdq2*y^!s+wa@jn1f1lgta2n5x!*-8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#Modified for heroku
-DEBUG = False
+#Modified for heroku reverted
+DEBUG = True
 
 #Modified for heroku
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-
+#ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic', #Modified for heroku
+    #'whitenoise.runserver_nostatic', #Modified for heroku
     'AI_Fraud_Detection.apps.AiFraudDetectionConfig',
     'users.apps.UsersConfig',
     'CFD_ML.apps.CfdMlConfig',
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #Modified for heroku
+    #'whitenoise.middleware.WhiteNoiseMiddleware', #Modified for heroku
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,23 +83,23 @@ WSGI_APPLICATION = 'CFD_EE.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-import dj_database_url #Modified for heroku
+#import dj_database_url #Modified for heroku
 
 DATABASES = {
-    'default': {#Modified for heroku deployment
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'default': {#Modified for heroku deployment reverted
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        #'USER': '',
+        #'PASSWORD': '',
+        #'HOST': 'localhost',
+        #'PORT': '',
     }
 }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#Modified for heroku deployment reverted
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -147,3 +147,9 @@ CRISPY_TEMPLATE_PACK= 'bootstrap4'
 LOGIN_REDIRECT_URL = 'AI-home'
 
 LOGIN_URL = 'login'
+
+
+
+#Modified for heroku deployment
+#WHITENOISE_USE_FINDERS = True 
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
