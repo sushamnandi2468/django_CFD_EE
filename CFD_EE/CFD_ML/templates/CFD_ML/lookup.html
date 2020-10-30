@@ -1,117 +1,45 @@
-{% extends "AI_Fraud_Detection/base1.html" %}
+{% extends "AI_Fraud_Detection/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container">
-    <!-- Page Heading/Breadcrumbs -->
-    <ol class="breadcrumb mt-4 mb-3">
-        <li class="breadcrumb-item">
-          <a href="{% url 'AI-home' %}">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Single Lookup</li>
-    </ol>
-
+<div class="col-lg-8 mb-4">
+    <form method="POST" enctype="multipart/form-data" action="singlelookup">
+        {% csrf_token %}
+        <legend class="border-bottom mb-4">Single Lookup Check</legend>
+        <div class="control-group form-group">
+            <div class="controls">                    
+                <label>First Name</label>
+                <input type="text" class="form-control" name="fname" required data-validation-required-message="Please enter First Name.">
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group form-group">
+            <div class="controls">                    
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="lname" required data-validation-required-message="Please enter Last Name.">
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group form-group">
+            <div class="controls">                    
+                <label>Date of Birth</label>
+                <input type="date" class="form-control" name="dob" required data-validation-required-message="Please enter Date of Birth.">
+                <p class="help-block"></p>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Classify</button>                
+    </form>
     <div class="row mt-4 mb-3">
-        <div class="col-lg-8 mb-4">
-            <form method="POST" enctype="multipart/form-data" action="singlelookup">
-                {% csrf_token %}
-                <legend class="border-bottom mb-4">Single Lookup Check</legend>
-                <div class="control-group form-group">
-                    <div class="controls">                    
-                        <label>First Name</label>
-                        <input type="text" class="form-control" name="fname" required data-validation-required-message="Please enter First Name.">
-                        <p class="help-block"></p>
-                    </div>
-                </div>
-                <div class="control-group form-group">
-                    <div class="controls">                    
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" name="lname" required data-validation-required-message="Please enter Last Name.">
-                        <p class="help-block"></p>
-                    </div>
-                </div>
-                <div class="control-group form-group">
-                    <div class="controls">                    
-                        <label>Date of Birth</label>
-                        <input type="date" class="form-control" name="dob" required data-validation-required-message="Please enter Date of Birth.">
-                        <p class="help-block"></p>
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary" type="submit">Classify</button>                
-            </form>
-            <div class="row mt-4 mb-3">
-                {% if prediction %}
-                <div class="mt-4 mb-3">
-                    <mark>The customer is :</mark>
-                    {% if prediction.label == 'Not Fraud' %}        
-                        <font color='green' style="font-weight: bolder;">{{ prediction.label }}</font>
-                    {% else %}
-                        <font color='red' style="font-weight: bolder;">{{ prediction.label }}</font>
-                    {% endif %}                
-                </div>
-                {% endif %}
-            </div>
+        {% if prediction %}
+        <div class="mt-4 mb-3">
+            <mark>The customer is :</mark>
+            {% if prediction.label == 'Not Fraud' %}        
+                <font color='green' style="font-weight: bolder;">{{ prediction.label }}</font>
+            {% else %}
+                <font color='red' style="font-weight: bolder;">{{ prediction.label }}</font>
+            {% endif %}                
         </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-            <!-- Search Widget -->
-            <div class="card mb-4">
-            <h5 class="card-header">Tags</h5>
-                <div class="card-body">
-                    <img src="/media/DRR.PNG">
-                </div>
-            </div>
-            <!-- Categories Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Categories</h5>
-                <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-10">
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                            <a href="{% url 'classify' %}">Customer Fraud Detection</a>
-                            </li>
-                            <li>
-                            <a href="{% url 'lookup' %}">Customer Single Lookup</a>
-                            </li>
-                            <li>
-                            <a href="#">Payment Fraud Detection</a>
-                            </li>
-                            <li>
-                            <a href="#">Payment Single Lookup</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <!-- References Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">References</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-10">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                <a href="#"></a>
-                                </li>
-                                <li>
-                                <a href="#"></a>
-                                </li>
-                                <li>
-                                <a href="#"></a>
-                                </li>
-                                <li>
-                                <a href="#"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endif %}
     </div>
-    
 </div>
 {% endblock content %}
