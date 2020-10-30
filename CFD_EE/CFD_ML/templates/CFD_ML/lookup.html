@@ -1,0 +1,45 @@
+{% extends "AI_Fraud_Detection/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col-lg-8 mb-4">
+    <form method="POST" enctype="multipart/form-data" action="singlelookup">
+        {% csrf_token %}
+        <legend class="border-bottom mb-4">Single Lookup Check</legend>
+        <div class="control-group form-group">
+            <div class="controls">                    
+                <label>First Name</label>
+                <input type="text" class="form-control" name="fname" required data-validation-required-message="Please enter First Name.">
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group form-group">
+            <div class="controls">                    
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="lname" required data-validation-required-message="Please enter Last Name.">
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <div class="control-group form-group">
+            <div class="controls">                    
+                <label>Date of Birth</label>
+                <input type="date" class="form-control" name="dob" required data-validation-required-message="Please enter Date of Birth.">
+                <p class="help-block"></p>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Classify</button>                
+    </form>
+    <div class="row mt-4 mb-3">
+        {% if prediction %}
+        <div class="mt-4 mb-3">
+            <mark>The customer is :</mark>
+            {% if prediction.label == 'Not Fraud' %}        
+                <font color='green' style="font-weight: bolder;">{{ prediction.label }}</font>
+            {% else %}
+                <font color='red' style="font-weight: bolder;">{{ prediction.label }}</font>
+            {% endif %}                
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

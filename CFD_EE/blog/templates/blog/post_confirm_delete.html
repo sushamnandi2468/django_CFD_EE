@@ -1,0 +1,12 @@
+{% extends "AI_Fraud_Detection/base.html" %}
+{% block content %}
+<div class="col-lg-8 mb-4">
+    <form method="POST">
+        {% csrf_token %}
+        <legend class="border-bottom mb-4">Delete Post</legend>
+            <h2>Are you sure you want to delete the post "{{ object.title}}"</h2>       
+        <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>  
+        <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>              
+    </form>
+</div>
+{% endblock content %}

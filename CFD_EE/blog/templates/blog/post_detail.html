@@ -1,0 +1,24 @@
+{% extends "AI_Fraud_Detection/base.html" %}
+{% block content %}       
+<!-- Blog Entries Column -->
+<div class="col-md-8">
+
+<!-- Blog Post -->
+<div class="card mb-4">
+    <!--<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">-->
+    <div class="card-body">
+        <h2 class="card-title">{{ object.title }}</h2>
+        <p class="card-text">{{ object.content }}                    
+    </div>
+    <div class="card-footer text-muted">
+        {{ object.date_posted|date:"F d, Y" }} {{object.author}}
+        {% if object.author == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+</div> 
+{% endblock content %}

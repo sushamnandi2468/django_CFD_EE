@@ -1,0 +1,1 @@
+web: gunicorn CFD_EE.wsgi --log-file -
