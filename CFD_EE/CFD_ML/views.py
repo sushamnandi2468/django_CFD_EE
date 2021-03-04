@@ -11,9 +11,26 @@ from .forms import LookUpForm
 import matplotlib.pyplot as plt
 from io import StringIO
 import urllib, base64
+from .models import FraudDetectCount
 
 def classify(request):
-    return render(request, 'CFD_ML/model.html')
+    record = FraudDetectCount.objects.all() 
+    fp_sum =0 
+    f_sum =0
+    n_sum =0 
+    file_count=len(record)
+    for i in record: 
+        fp_sum = fp_sum + i.FalsePos
+        f_sum = f_sum + i.Suspicious
+        n_sum = n_sum + i.NewCust
+
+    context ={
+              'fp_sum' : fp_sum,
+              'f_sum'  : f_sum,
+              'n_sum'  : n_sum,
+              'file_count': file_count
+    }
+    return render(request, 'CFD_ML/model.html', context)
 
 @login_required
 def prediction(request):
@@ -41,6 +58,7 @@ def prediction(request):
         vals=vals.to_dict()
         #x= vals.keys()
         #y= vals.values()
+        FraudDetectCount.objects.create(Filename=uploaded_file.name , Percentage=fp_percent , FalsePos=fp_count, Suspicious=f_count, NewCust=n_count)
         plt.title('Number of False Positives Captured')
         plt.xlabel('Classification')
         plt.ylabel('Count')
@@ -49,6 +67,18 @@ def prediction(request):
         plt.bar(range(len(vals)), list(vals.values()), align="center")
         plt.xticks(range(len(vals)), list(vals.keys()))
         plt.savefig('media/graph.png')
+        # calculating KPI  
+        record = FraudDetectCount.objects.all() 
+        fp_sum =0 
+        f_sum =0
+        n_sum =0 
+        file_count=len(record)
+        #sum_suspicious , sum_newcust = 0 
+        for i in record: 
+            fp_sum = fp_sum + i.FalsePos
+            f_sum = f_sum + i.Suspicious
+            n_sum = n_sum + i.NewCust
+         
 
     context ={
         'uploaded_file' : uploaded_file,
@@ -56,7 +86,11 @@ def prediction(request):
         'fp_percent' : fp_percent,
         'fp_count' : fp_count,
         'f_count' : f_count,
-        'n_count' : n_count        
+        'n_count' : n_count,
+        'fp_sum'  : fp_sum,
+        'f_sum'  : f_sum,
+        'n_sum'  : n_sum,
+        'file_count' : file_count
     }
     return render(request, 'CFD_ML/model.html', context)
 
@@ -90,3 +124,7 @@ def singlelookup(request):
         'prediction' : prediction
     }
     return render(request, 'CFD_ML/lookup.html', context)
+
+def predictdata(request):
+    d= FraudDetectCount.objects.all()
+    return render(request, 'CFD_ML/predictdata.html', {'data':d})

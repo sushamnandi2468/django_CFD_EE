@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="col-lg-8 mb-4">
+  <hr>
+  <div >
+    <p class ='card-text'><b>File Scanned</b> -- {{file_count}} &nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <b>False Positive Detected</b> -- {{fp_sum}}</p>
+    <p class ='card-text'><b>Suspicious Detected</b> -- {{f_sum}} &nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <b>New Customer Detected</b> -- {{n_sum}} </p>
+  </div>
+  <hr><br>
   <form method="POST" enctype="multipart/form-data" action="prediction">
       {% csrf_token %}
       <fieldset class="form-group">
@@ -22,6 +28,7 @@
       <div class="form-group">
           <button class="btn btn-outline-info" type="submit">Classify</button>
       </div>
+      <a class="nav-link" href="{% url 'PredictData' %}">Click to view Prediction History</a>
   </form>
   {% if prediction %}
 
@@ -44,7 +51,7 @@
             </td>                   
           </tr>
           <tr> 
-            <td>Fraud</td> 
+            <td>Suspicious</td> 
             <td>
               {{f_count}}
             </td>                   

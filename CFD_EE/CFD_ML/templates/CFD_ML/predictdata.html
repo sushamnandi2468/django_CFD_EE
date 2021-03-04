@@ -1,0 +1,32 @@
+{% extends "AI_Fraud_Detection/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!--<div class="row mt-4 mb-3col-lg-8 mb-4">-->
+<div class="col-lg-8 mb-4">
+    <h3>Prediction History</h3><br>
+    <table class="table table-light table-striped"> 
+        <thead> 
+        <tr> 
+            <th>Filename</th> 
+            <th>Percentage</th> 
+            <th>False Positive</th>
+            <th>Suspicious</th> 
+            <th>New Customer</th>
+        </tr> 
+        </thead> 
+        <tbody> 
+        <!-- jinja2 Technique -->
+        
+        {% for d in data %} 
+        <tr> 
+            <td>{{d.Filename}}</td> 
+            <td>{{d.Percentage}}</td> 
+            <td>{{d.FalsePos}}</td>
+            <td>{{d.Suspicious}}</td>
+            <td>{{d.NewCust}}</td>
+        </tr> 
+        {% endfor %} 
+        </tbody> 
+    </table> 
+</div>
+{% endblock content %}
