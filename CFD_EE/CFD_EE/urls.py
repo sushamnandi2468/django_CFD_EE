@@ -32,6 +32,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('classify/', ml_views.classify, name='classify'),
     path('classify/prediction', ml_views.prediction, name='Predict'),
+    path('classify/prediction/data',ml_views.predictdata , name= 'PredictData'),
     path('lookup/', ml_views.lookup, name='lookup'),
     path('lookup/singlelookup', ml_views.singlelookup, name='slookup'),
 ] 

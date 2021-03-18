@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Fraud Detection using AI</title>
+  
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'AI_Fraud_Detection/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  
+    <!-- Custom styles for this template -->
+    <link href="{% static 'AI_Fraud_Detection/css/modern-business.css' %}" rel="stylesheet">
+  
+  </head>
+<body>    
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'AI-home' %}"><img src="/media/CG_Invent.png" height=50></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto"> 
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Fraud Detection
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="{% url 'classify' %}">Customer Fraud Detection</a>
+                <a class="dropdown-item" href="{% url 'lookup' %}">Customer Single Lookup</a>
+                <a class="dropdown-item" href="#">Payment Fraud Detection</a>
+                <a class="dropdown-item" href="#">Payment Single Lookup</a>                
+              </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog-home' %}">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <ol class="breadcrumb mt-4 mb-3">
+          <li class="breadcrumb-item">
+          <a href="{% url 'AI-home' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item active">Blog</li>
+        </ol>
+      <div class="row">
+        <!-- Blog Entries Column -->
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; CFD 2020</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+      <!-- Bootstrap core JavaScript -->
+      <script src="{% static 'AI_Fraud_Detection/vendor/jquery/jquery.min.js' %}"></script>
+      <script src="{% static 'AI_Fraud_Detection/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

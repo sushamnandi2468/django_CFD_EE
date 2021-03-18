@@ -1,4 +1,4 @@
-from sklearn.externals import joblib
+import joblib
 from nltk.tokenize.treebank import TreebankWordDetokenizer as wd
 import matplotlib.pyplot as plt
 import pandas as pd

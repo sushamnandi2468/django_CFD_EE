@@ -1,7 +1,56 @@
-{% extends "AI_Fraud_Detection/base.html" %}
+{% extends "AI_Fraud_Detection/base2.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <div class="col-lg-8 mb-4">
+  <div class="row">
+      {% autoescape off %}
+      {{ plot_div1 }}
+      {% endautoescape %}
+  </div>
+</div>
+
+<!--
+<div class="col-lg-8 mb-4">
+  <div class="row">
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">File Scanned</h6>
+        <div class="card-body">
+          <div class="display-5">{{file_count}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">False Positive</h6>
+        <div class="card-body">
+          <div class="display-5">{{fp_sum}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">Suspicious Detected</h6>
+        <div class="card-body">
+          <div class="display-5">{{f_sum}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">New Customers</h6>
+        <div class="card-body">
+          <div class="display-5">{{n_sum}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+-->
+  <hr><br>
   <form method="POST" enctype="multipart/form-data" action="prediction">
       {% csrf_token %}
       <fieldset class="form-group">
@@ -22,6 +71,7 @@
       <div class="form-group">
           <button class="btn btn-outline-info" type="submit">Classify</button>
       </div>
+      <a class="nav-link" href="{% url 'PredictData' %}">Click to view Prediction History</a>
   </form>
   {% if prediction %}
 
@@ -44,7 +94,7 @@
             </td>                   
           </tr>
           <tr> 
-            <td>Fraud</td> 
+            <td>Suspicious</td> 
             <td>
               {{f_count}}
             </td>                   
@@ -60,7 +110,9 @@
     </div>
 
     <div>
-      <img src="/media/graph.png" height="400">
+      {% autoescape off %}
+      {{ plot_div }}
+      {% endautoescape %}
     </div>
   
   <h3>Classification Data</h3>
