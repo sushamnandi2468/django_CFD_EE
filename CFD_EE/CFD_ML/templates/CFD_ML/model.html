@@ -1,12 +1,55 @@
-{% extends "AI_Fraud_Detection/base.html" %}
+{% extends "AI_Fraud_Detection/base2.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
 <div class="col-lg-8 mb-4">
-  <hr>
-  <div >
-    <p class ='card-text'><b>File Scanned</b> -- {{file_count}} &nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <b>False Positive Detected</b> -- {{fp_sum}}</p>
-    <p class ='card-text'><b>Suspicious Detected</b> -- {{f_sum}} &nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <b>New Customer Detected</b> -- {{n_sum}} </p>
+  <div class="row">
+      {% autoescape off %}
+      {{ plot_div1 }}
+      {% endautoescape %}
   </div>
+</div>
+
+<!--
+<div class="col-lg-8 mb-4">
+  <div class="row">
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">File Scanned</h6>
+        <div class="card-body">
+          <div class="display-5">{{file_count}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">False Positive</h6>
+        <div class="card-body">
+          <div class="display-5">{{fp_sum}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">Suspicious Detected</h6>
+        <div class="card-body">
+          <div class="display-5">{{f_sum}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h6 class="card-header">New Customers</h6>
+        <div class="card-body">
+          <div class="display-5">{{n_sum}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+-->
   <hr><br>
   <form method="POST" enctype="multipart/form-data" action="prediction">
       {% csrf_token %}
@@ -67,7 +110,9 @@
     </div>
 
     <div>
-      <img src="/media/graph.png" height="400">
+      {% autoescape off %}
+      {{ plot_div }}
+      {% endautoescape %}
     </div>
   
   <h3>Classification Data</h3>

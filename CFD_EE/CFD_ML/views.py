@@ -12,6 +12,10 @@ import matplotlib.pyplot as plt
 from io import StringIO
 import urllib, base64
 from .models import FraudDetectCount
+#from plotly.offline import plot
+from plotly.graph_objs import Indicator ,Bar, Pie
+#import plotly.graph_objs as go
+
 
 def classify(request):
     record = FraudDetectCount.objects.all() 
@@ -24,11 +28,17 @@ def classify(request):
         f_sum = f_sum + i.Suspicious
         n_sum = n_sum + i.NewCust
 
+    plot_div1 = plot([Pie(labels=['FP Detected','Suspicious','New Customer'], values=([fp_sum,f_sum,n_sum]),
+                        name='test',
+                        opacity=0.8)],
+                        output_type='div') 
+
     context ={
               'fp_sum' : fp_sum,
               'f_sum'  : f_sum,
               'n_sum'  : n_sum,
-              'file_count': file_count
+              'file_count': file_count,
+              'plot_div1':plot_div1
     }
     return render(request, 'CFD_ML/model.html', context)
 
@@ -67,6 +77,12 @@ def prediction(request):
         plt.bar(range(len(vals)), list(vals.values()), align="center")
         plt.xticks(range(len(vals)), list(vals.keys()))
         plt.savefig('media/graph.png')
+        #Plotly Bar chart
+        plot_div = plot([Bar(x=list(vals.keys()), y=list(vals.values()),
+                        name='test',
+                        opacity=0.8, marker_color='green')],
+                        output_type='div')
+ 
         # calculating KPI  
         record = FraudDetectCount.objects.all() 
         fp_sum =0 
@@ -78,6 +94,11 @@ def prediction(request):
             fp_sum = fp_sum + i.FalsePos
             f_sum = f_sum + i.Suspicious
             n_sum = n_sum + i.NewCust
+
+        plot_div1 = plot([Pie(labels=['FP Detected','Suspicious','New Customer'], values=([fp_sum,f_sum,n_sum]),
+                        name='test',
+                        opacity=0.8)],
+                        output_type='div') 
          
 
     context ={
@@ -90,7 +111,9 @@ def prediction(request):
         'fp_sum'  : fp_sum,
         'f_sum'  : f_sum,
         'n_sum'  : n_sum,
-        'file_count' : file_count
+        'file_count' : file_count,
+        'plot_div' : plot_div,
+        'plot_div1' : plot_div1
     }
     return render(request, 'CFD_ML/model.html', context)
 
@@ -127,4 +150,22 @@ def singlelookup(request):
 
 def predictdata(request):
     d= FraudDetectCount.objects.all()
-    return render(request, 'CFD_ML/predictdata.html', {'data':d})
+    fp_sum =0 
+    f_sum =0
+    n_sum =0 
+    file_count=len(d)
+    for i in d: 
+        fp_sum = fp_sum + i.FalsePos
+        f_sum = f_sum + i.Suspicious
+        n_sum = n_sum + i.NewCust
+  
+    plot_div1 = plot([Pie(labels=['FP Detected','Suspicious','New Customer'], values=([fp_sum,f_sum,n_sum]),
+                        name='test',
+                        opacity=0.8)],
+                        output_type='div') 
+    context = {
+        'data' : d,
+        'plot_div1' : plot_div1,
+    }
+
+    return render(request, 'CFD_ML/predictdata.html', context)
