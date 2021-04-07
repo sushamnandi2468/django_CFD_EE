@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from io import StringIO
 import urllib, base64
 from .models import FraudDetectCount
-#from plotly.offline import plot
+from plotly.offline import plot
 from plotly.graph_objs import Indicator ,Bar, Pie
 #import plotly.graph_objs as go
 
