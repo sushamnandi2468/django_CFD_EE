@@ -1,13 +1,23 @@
-{% extends "AI_Fraud_Detection/base.html" %}
+{% extends "AI_Fraud_Detection/base2.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 <!--<div class="row mt-4 mb-3col-lg-8 mb-4">-->
+    <div class="col-lg-8 mb-4">
+        <div class="row">
+            {% autoescape off %}
+            {{ plot_div1 }}
+            {% endautoescape %}
+        </div>
+    </div>
+             
+
 <div class="col-lg-8 mb-4">
     <h3>Prediction History</h3><br>
     <table class="table table-light table-striped"> 
         <thead> 
         <tr> 
-            <th>Filename</th> 
+            <th>Filename</th>
+            <th>Time</th>
             <th>Percentage</th> 
             <th>False Positive</th>
             <th>Suspicious</th> 
@@ -20,6 +30,8 @@
         {% for d in data %} 
         <tr> 
             <td>{{d.Filename}}</td> 
+            <!-- <td>{{d.DateTime}}</td> -->
+            <td>{{d.DateTime|date:"M d, Y g:i a"}}</td>
             <td>{{d.Percentage}}</td> 
             <td>{{d.FalsePos}}</td>
             <td>{{d.Suspicious}}</td>
@@ -28,5 +40,5 @@
         {% endfor %} 
         </tbody> 
     </table> 
-</div>
+</div> 
 {% endblock content %}
