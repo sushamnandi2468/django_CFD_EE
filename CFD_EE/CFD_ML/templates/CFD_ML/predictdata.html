@@ -16,7 +16,8 @@
     <table class="table table-light table-striped"> 
         <thead> 
         <tr> 
-            <th>Filename</th> 
+            <th>Filename</th>
+            <th>Time</th>
             <th>Percentage</th> 
             <th>False Positive</th>
             <th>Suspicious</th> 
@@ -29,6 +30,8 @@
         {% for d in data %} 
         <tr> 
             <td>{{d.Filename}}</td> 
+            <!-- <td>{{d.DateTime}}</td> -->
+            <td>{{d.DateTime|date:"M d, Y g:i a"}}</td>
             <td>{{d.Percentage}}</td> 
             <td>{{d.FalsePos}}</td>
             <td>{{d.Suspicious}}</td>
