@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
   
-    <title>Fraud Detection using AI</title>
+    <title>Suspicious Detection using AI</title>
   
     <!-- Bootstrap core CSS -->
     <link href="{% static 'AI_Fraud_Detection/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -29,12 +29,12 @@
           <ul class="navbar-nav ml-auto"> 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Fraud Detection
+                Suspicious Detection
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="{% url 'classify' %}">Customer Fraud Detection</a>
+                <a class="dropdown-item" href="{% url 'classify' %}">Customer Suspicious Detection</a>
                 <a class="dropdown-item" href="{% url 'lookup' %}">Customer Single Lookup</a>
-                <a class="dropdown-item" href="#">Payment Fraud Detection</a>
+                <a class="dropdown-item" href="#">Payment Suspicious Detection</a>
                 <a class="dropdown-item" href="#">Payment Single Lookup</a>                
               </div>
             </li>

@@ -61,7 +61,7 @@ class CustomerFraudDetection:
         if input_data[1] == 0:
             label = 'False Positive'
         else :
-            label = 'Fraud'
+            label = 'Suspicious'
         return {"probability": input_data[1], "label": label, "status": "OK"}
             
     def compute_prediction(self):

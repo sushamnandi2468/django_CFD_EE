@@ -1,17 +1,17 @@
 ,First_Name,Last_Name,DD,MM,YYYY,Dedup,id,label
 0,asdsad,fdgdfgdfg,7,12,1965,0,0,New Customer
 1,SAED,aaaaaa,7,12,1965,0,1,New Customer
-2,SAED,ELHOORIE,7,12,1965,1,2,Fraud
-3,SAJID,MIR,18,9,1978,1,3,Fraud
-4,ABD,AWDA,22,12,1950,1,4,Fraud
-5,DANIEL,ANDREAS,20,3,1978,1,5,Fraud
-6,HUSAM,ABDALRAUF,13,8,1958,1,6,Fraud
-7,JABER,ELBANEH,6,6,1966,1,7,Fraud
-8,IBRAHIM,SALIH,14,10,1966,1,8,Fraud
-9,Nicolea,Hanse,28,1,1988,1,9,Fraud
+2,SAED,ELHOORIE,7,12,1965,1,2,Suspicious
+3,SAJID,MIR,18,9,1978,1,3,Suspicious
+4,ABD,AWDA,22,12,1950,1,4,Suspicious
+5,DANIEL,ANDREAS,20,3,1978,1,5,Suspicious
+6,HUSAM,ABDALRAUF,13,8,1958,1,6,Suspicious
+7,JABER,ELBANEH,6,6,1966,1,7,Suspicious
+8,IBRAHIM,SALIH,14,10,1966,1,8,Suspicious
+9,Nicolea,Hanse,28,1,1988,1,9,Suspicious
 10,Donica,Rishworth,10,7,1992,1,10,False Positive
 11,Hyacinthe,Goodding,30,1,2005,1,11,False Positive
-12,Kira,Leguay,25,2,2008,1,12,Fraud
+12,Kira,Leguay,25,2,2008,1,12,Suspicious
 13,Niels,Santi,12,4,1975,1,13,False Positive
 14,Delphine,Asbrey,24,3,2000,1,14,False Positive
 15,Lowe,Tebboth,16,9,1977,1,15,False Positive
