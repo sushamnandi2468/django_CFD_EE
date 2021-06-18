@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from io import StringIO
 import urllib, base64
 from .models import FraudDetectCount
-#from plotly.offline import plot
+from plotly.offline import plot
 from plotly.graph_objs import Indicator ,Bar, Pie
 #import plotly.graph_objs as go
 
@@ -68,6 +68,8 @@ def prediction(request):
         vals=vals.to_dict()
         #x= vals.keys()
         #y= vals.values()
+
+        # Insert values in the database table
         FraudDetectCount.objects.create(Filename=uploaded_file.name , Percentage=fp_percent , FalsePos=fp_count, Suspicious=f_count, NewCust=n_count)
         plt.title('Number of False Positives Captured')
         plt.xlabel('Classification')

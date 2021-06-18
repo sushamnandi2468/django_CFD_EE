@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import json
+import datetime as dt
 
 model = joblib.load("CFD_ML/algorithms/FDTree.joblib")
 wi_fn = joblib.load("CFD_ML/algorithms/wi_fn.joblib")
@@ -35,7 +36,7 @@ class CustomerFraudDetection:
         input_data['MM']=input_data['MM'].astype(int)
         input_data['YYYY']=input_data['YYYY'].astype(int)
         #Now DOB column can be dropped from the dataframe
-        input_data=input_data.drop(columns=['DOB','Customer_Type', 'PAN', 'Deceased_Flag', 'Gender', 'Martial_Status', 'PEP_Flag', 'CTF_Flag', 'Country_of_residence', 'Country_of_Origin'])
+        input_data=input_data.drop(columns=['DOB','Customer_Type', 'PAN', 'Deceased_Flag', 'Gender', 'Martial_Status', 'PEP_Flag', 'CTF_Flag', 'Country_of_residence', 'Country_of_Origin','Risk_level','Product_name'])
 
         input_data = self.new_customer_identification(input_data)
 
@@ -61,7 +62,7 @@ class CustomerFraudDetection:
         if input_data[1] == 0:
             label = 'False Positive'
         else :
-            label = 'Fraud'
+            label = 'Suspicious'
         return {"probability": input_data[1], "label": label, "status": "OK"}
             
     def compute_prediction(self):
@@ -83,12 +84,21 @@ class CustomerFraudDetection:
 
         #st.write("Final Dict", pred_full)    
         df_pred=pd.DataFrame(list(pred_full.items()), columns=['id','label'])            
+        #df_pred=pd.DataFrame(pred_full, index=[0])
         df_pred.drop(columns='id')
         #st.write("Latest Prediction post processing is", df_pred)        
-        output_data = pd.concat([input_data, df_pred.reindex(input_data.index)], axis=1)
+        #output_data = pd.concat([input_data, df_pred.reindex(input_data.index)], axis=1)
+        output_data = pd.concat([input_data, df_pred], axis=1)
         output_data['First_Name']=actual_data['First_Name']
         output_data['Last_Name']=actual_data['Last_Name']
         #output_data = output_data.drop(columns='Dedup')
+        output_data['DateTime']=dt.datetime.now()
+        output_data['Risk_level']=actual_data['Risk_level']
+        output_data['Country_of_residence']=actual_data['Country_of_residence']
+        output_data['Product_name']=actual_data['Product_name']
+        output_data.drop(columns=['Dedup','id'], inplace=True, axis=1)
+        #output_data.drop(output_data.columns[0], inplace=True, axis=1)
+        #output_data.reset_index(drop=True, inplace=True)
 
         return output_data
 
